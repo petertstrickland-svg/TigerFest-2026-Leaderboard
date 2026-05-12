@@ -16,12 +16,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .header p { font-size: 12px; opacity: 0.7; margin-top: 3px; }
 
 .tabs { display: flex; background: #1a472a; border-bottom: 2px solid #c9a84c; }
-.tab { flex: 1; padding: 10px 4px; text-align: center; font-size: 13px; color: rgba(255,255,255,0.6); cursor: pointer; border: none; background: none; transition: all 0.15s; font-family: inherit; }
+.tab { flex: 1; padding: 9px 2px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.6); cursor: pointer; border: none; background: none; transition: all 0.15s; font-family: inherit; }
 .tab.active { color: #c9a84c; border-bottom: 2px solid #c9a84c; margin-bottom: -2px; font-weight: 600; }
 
 .section { display: none; padding: 0.875rem; }
 .section.active { display: block; }
 
+/* Leaderboard */
 .leaderboard-card { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 0.875rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .lb-header { display: grid; grid-template-columns: 36px 1fr 70px; gap: 6px; padding: 8px 14px; background: #f4f4f0; font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
 .lb-row { display: grid; grid-template-columns: 36px 1fr 70px; gap: 6px; padding: 11px 14px; border-top: 1px solid #f0f0ec; align-items: center; }
@@ -38,6 +39,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .playoff-team-pill { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: #c9a84c; font-size: 12px; padding: 5px 12px; border-radius: 20px; font-weight: 500; }
 .no-playoff { color: rgba(255,255,255,0.45); font-size: 13px; }
 
+/* Daily leaderboards */
 .day-section { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 0.875rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .day-header { padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; }
 .day-title { font-size: 13px; font-weight: 700; color: #1a1a1a; }
@@ -54,14 +56,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .friday-pts { color: #1e40af; }
 .saturday-pts { color: #166534; }
 
+/* Match cards */
 .round-label { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.7px; margin: 0.875rem 0 0.5rem; padding: 0 2px; display: flex; align-items: center; gap: 8px; }
 .round-label span { flex: 1; height: 1px; background: #e8e8e4; }
 .match-card { background: white; border-radius: 12px; padding: 0.875rem 1rem; margin-bottom: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
-.match-format { font-size: 10px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.match-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.match-format { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.tee-time { font-size: 11px; font-weight: 600; color: #c9a84c; background: rgba(201,168,76,0.1); padding: 2px 8px; border-radius: 8px; }
 .match-row { display: grid; grid-template-columns: 1fr 36px 1fr; align-items: center; gap: 6px; }
 .match-team { font-size: 13px; font-weight: 600; color: #1a1a1a; }
 .match-team.right { text-align: right; }
-.match-vs { text-align: center; font-size: 11px; color: #bbb; font-weight: 500; }
+.match-vs { text-align: center; font-size: 11px; color: #bbb; }
+.player-row { display: grid; grid-template-columns: 1fr 36px 1fr; gap: 6px; margin-top: 3px; }
+.player-info { font-size: 11px; color: #aaa; }
+.player-info.right { text-align: right; }
 .score-inputs { display: grid; grid-template-columns: 1fr 24px 1fr; gap: 6px; margin-top: 10px; align-items: center; }
 .score-input-wrap { display: flex; flex-direction: column; gap: 3px; }
 .score-input-wrap label { font-size: 10px; color: #aaa; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; }
@@ -77,20 +85,52 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .score-input-wrap input:focus { outline: none; border-color: #1a472a; background: white; }
 .score-sep { text-align: center; font-size: 14px; color: #ccc; }
 .singles-note { font-size: 11px; color: #aaa; margin-top: 8px; padding-top: 8px; border-top: 1px solid #f0f0ec; }
+
+/* Thursday */
+.thu-info { background: white; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 0.875rem; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.thu-info h3 { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+.thu-info p { font-size: 12px; color: #999; }
+.thu-time { display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 600; color: #c9a84c; background: rgba(201,168,76,0.1); padding: 4px 14px; border-radius: 10px; }
+.thu-teams { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.thu-team-row { display: flex; align-items: center; padding: 10px 14px; border-top: 1px solid #f0f0ec; }
+.thu-team-row:first-child { border-top: none; }
+.thu-team-num { font-size: 11px; color: #bbb; font-weight: 600; width: 52px; }
+.thu-team-name { font-size: 14px; font-weight: 600; color: #1a1a1a; }
 </style>
 </head>
 <body>
 <div class="app">
   <div class="header">
     <h1>🏌️ TigerFest 2026</h1>
-    <p>May 29–30 · Match Play</p>
+    <p>May 28–30 · Match Play</p>
   </div>
   <div class="tabs">
+    <button class="tab" onclick="showTab('thursday', this)">Thursday</button>
     <button class="tab active" onclick="showTab('leaderboard', this)">Leaderboard</button>
     <button class="tab" onclick="showTab('friday', this)">Friday</button>
     <button class="tab" onclick="showTab('saturday', this)">Saturday</button>
   </div>
 
+  <!-- THURSDAY -->
+  <div id="thursday" class="section">
+    <div class="thu-info">
+      <h3>⛳ Par 3 Captain's Choice</h3>
+      <p>Thursday, May 28th · 2-Man Scramble</p>
+      <div class="thu-time">⏰ 5:00 PM Shotgun Start</div>
+    </div>
+    <div class="thu-teams">
+      <div class="thu-team-row"><span class="thu-team-num">Team 1</span><span class="thu-team-name">Merman & Cuz</span></div>
+      <div class="thu-team-row"><span class="thu-team-num">Team 2</span><span class="thu-team-name">Borden & Will S.</span></div>
+      <div class="thu-team-row"><span class="thu-team-num">Team 3</span><span class="thu-team-name">Brent & Phil</span></div>
+      <div class="thu-team-row"><span class="thu-team-num">Team 4</span><span class="thu-team-name">Chris & TJ</span></div>
+      <div class="thu-team-row"><span class="thu-team-num">Team 5</span><span class="thu-team-name">McCoy & Waldrip</span></div>
+      <div class="thu-team-row"><span class="thu-team-num">Team 6</span><span class="thu-team-name">Peter & Ricky</span></div>
+      <div class="thu-team-row"><span class="thu-team-num">Team 7</span><span class="thu-team-name">Hugh & TFarm</span></div>
+      <div class="thu-team-row"><span class="thu-team-num">Team 8</span><span class="thu-team-name">Willy & Jeff</span></div>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD -->
   <div id="leaderboard" class="section active">
     <div class="leaderboard-card">
       <div class="lb-header">
@@ -98,12 +138,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       </div>
       <div id="lb-rows"></div>
     </div>
-
     <div class="playoff-section">
       <h3>🏆 Playoff Bound (Top 4)</h3>
       <div id="playoff-teams" class="playoff-teams"></div>
     </div>
-
     <div class="day-section">
       <div class="day-header">
         <div>
@@ -115,7 +153,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="day-lb-header"><div>#</div><div>Team</div><div style="text-align:center">Pts</div></div>
       <div id="friday-lb-rows"></div>
     </div>
-
     <div class="day-section">
       <div class="day-header">
         <div>
@@ -129,6 +166,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     </div>
   </div>
 
+  <!-- FRIDAY -->
   <div id="friday" class="section">
     <div class="round-label">Round 1 — Fourball <span></span> 18 holes</div>
     <div id="r1-matches"></div>
@@ -136,6 +174,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div id="r2-matches"></div>
   </div>
 
+  <!-- SATURDAY -->
   <div id="saturday" class="section">
     <div class="round-label">Round 3 — Singles <span></span> Front 9 + Back 9</div>
     <div id="r3-matches"></div>
@@ -151,34 +190,34 @@ const TEAMS = [
   {id:'T7',name:'Chris & Will'},{id:'T8',name:'Merman & Hugh'}
 ];
 const MATCHES = [
-  {id:'m1',round:1,format:'Fourball',sideA:'Borden & Phil',sideB:'Merman & Hugh',teamA:'T4',teamB:'T8',holes:18},
-  {id:'m2',round:1,format:'Fourball',sideA:'TFarm & Rick',sideB:'McCoy & TJ',teamA:'T1',teamB:'T2',holes:18},
-  {id:'m3',round:1,format:'Fourball',sideA:'Willy & Cuz',sideB:'Peter & Waldrip',teamA:'T3',teamB:'T5',holes:18},
-  {id:'m4',round:1,format:'Fourball',sideA:'Chris & Will',sideB:'Brent & Jeff',teamA:'T7',teamB:'T6',holes:18},
-  {id:'m5',round:2,format:'Scramble',sideA:'Willy & Cuz',sideB:'Borden & Phil',teamA:'T3',teamB:'T4',holes:18},
-  {id:'m6',round:2,format:'Scramble',sideA:'Merman & Hugh',sideB:'TFarm & Rick',teamA:'T8',teamB:'T1',holes:18},
-  {id:'m7',round:2,format:'Scramble',sideA:'Brent & Jeff',sideB:'Peter & Waldrip',teamA:'T6',teamB:'T5',holes:18},
-  {id:'m8',round:2,format:'Scramble',sideA:'Chris & Will',sideB:'McCoy & TJ',teamA:'T7',teamB:'T2',holes:18},
-  {id:'m9',round:3,format:'Singles F9',sideA:'Borden',sideB:'Chris',teamA:'T4',teamB:'T7',holes:9},
-  {id:'m10',round:3,format:'Singles F9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9},
-  {id:'m11',round:3,format:'Singles F9',sideA:'McCoy',sideB:'Merman',teamA:'T2',teamB:'T8',holes:9},
-  {id:'m12',round:3,format:'Singles F9',sideA:'TJ',sideB:'Waldrip',teamA:'T2',teamB:'T5',holes:9},
-  {id:'m13',round:3,format:'Singles F9',sideA:'Peter',sideB:'Willy',teamA:'T5',teamB:'T3',holes:9},
-  {id:'m14',round:3,format:'Singles F9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9},
-  {id:'m15',round:3,format:'Singles F9',sideA:'Brent',sideB:'TFarm',teamA:'T6',teamB:'T1',holes:9},
-  {id:'m16',round:3,format:'Singles F9',sideA:'Jeff',sideB:'Hugh',teamA:'T6',teamB:'T8',holes:9},
-  {id:'m17',round:3,format:'Singles B9',sideA:'Borden',sideB:'McCoy',teamA:'T4',teamB:'T2',holes:9},
-  {id:'m18',round:3,format:'Singles B9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9},
-  {id:'m19',round:3,format:'Singles B9',sideA:'Merman',sideB:'Chris',teamA:'T8',teamB:'T7',holes:9},
-  {id:'m20',round:3,format:'Singles B9',sideA:'Hugh',sideB:'Waldrip',teamA:'T8',teamB:'T5',holes:9},
-  {id:'m21',round:3,format:'Singles B9',sideA:'Peter',sideB:'TFarm',teamA:'T5',teamB:'T1',holes:9},
-  {id:'m22',round:3,format:'Singles B9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9},
-  {id:'m23',round:3,format:'Singles B9',sideA:'Brent',sideB:'Willy',teamA:'T6',teamB:'T3',holes:9},
-  {id:'m24',round:3,format:'Singles B9',sideA:'Will',sideB:'Cuz',teamA:'T7',teamB:'T3',holes:9},
-  {id:'m25',round:4,format:'Alt Shot',sideA:'Brent & Jeff',sideB:'Borden & Phil',teamA:'T6',teamB:'T4',holes:18},
-  {id:'m26',round:4,format:'Alt Shot',sideA:'Merman & Hugh',sideB:'McCoy & TJ',teamA:'T8',teamB:'T2',holes:18},
-  {id:'m27',round:4,format:'Alt Shot',sideA:'Peter & Waldrip',sideB:'TFarm & Rick',teamA:'T5',teamB:'T1',holes:18},
-  {id:'m28',round:4,format:'Alt Shot',sideA:'Willy & Cuz',sideB:'Chris & Will',teamA:'T3',teamB:'T7',holes:18}
+  {id:'m1',round:1,format:'Fourball',sideA:'Borden & Phil',sideB:'Merman & Hugh',teamA:'T4',teamB:'T8',holes:18,time:'8:30 AM',playersA:'Borden (1) & Phil (17)',playersB:'Merman (0) & Hugh (8)'},
+  {id:'m2',round:1,format:'Fourball',sideA:'TFarm & Rick',sideB:'McCoy & TJ',teamA:'T1',teamB:'T2',holes:18,time:'8:40 AM',playersA:'TFarm (2) & Rick (5)',playersB:'McCoy (0) & TJ (8)'},
+  {id:'m3',round:1,format:'Fourball',sideA:'Willy & Cuz',sideB:'Peter & Waldrip',teamA:'T3',teamB:'T5',holes:18,time:'8:50 AM',playersA:'Willy (0) & Cuz (13)',playersB:'Peter (0) & Waldrip (6)'},
+  {id:'m4',round:1,format:'Fourball',sideA:'Chris & Will',sideB:'Brent & Jeff',teamA:'T7',teamB:'T6',holes:18,time:'9:00 AM',playersA:'Chris (2) & Will (12)',playersB:'Brent (0) & Jeff (6)'},
+  {id:'m5',round:2,format:'Scramble',sideA:'Willy & Cuz',sideB:'Borden & Phil',teamA:'T3',teamB:'T4',holes:18,time:'1:30 PM',playersA:'Willy & Cuz',playersB:'Borden & Phil'},
+  {id:'m6',round:2,format:'Scramble',sideA:'Merman & Hugh',sideB:'TFarm & Rick',teamA:'T8',teamB:'T1',holes:18,time:'1:40 PM',playersA:'Merman & Hugh',playersB:'TFarm & Rick'},
+  {id:'m7',round:2,format:'Scramble',sideA:'Brent & Jeff',sideB:'Peter & Waldrip',teamA:'T6',teamB:'T5',holes:18,time:'1:50 PM',playersA:'Brent & Jeff',playersB:'Pete & Waldrip'},
+  {id:'m8',round:2,format:'Scramble',sideA:'Chris & Will',sideB:'McCoy & TJ',teamA:'T7',teamB:'T2',holes:18,time:'2:00 PM',playersA:'Chris & Will',playersB:'McCoy & TJ'},
+  {id:'m9',round:3,format:'Singles F9',sideA:'Borden',sideB:'Chris',teamA:'T4',teamB:'T7',holes:9,time:'8:30 AM',playersA:'Borden (1)',playersB:'Chris (2)'},
+  {id:'m10',round:3,format:'Singles F9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9,time:'8:30 AM',playersA:'Phil (17)',playersB:'Cuz (13)'},
+  {id:'m11',round:3,format:'Singles F9',sideA:'McCoy',sideB:'Merman',teamA:'T2',teamB:'T8',holes:9,time:'8:40 AM',playersA:'McCoy (0)',playersB:'Merman (0)'},
+  {id:'m12',round:3,format:'Singles F9',sideA:'TJ',sideB:'Waldrip',teamA:'T2',teamB:'T5',holes:9,time:'8:40 AM',playersA:'TJ (8)',playersB:'Waldrip (6)'},
+  {id:'m13',round:3,format:'Singles F9',sideA:'Peter',sideB:'Willy',teamA:'T5',teamB:'T3',holes:9,time:'8:50 AM',playersA:'Peter (0)',playersB:'Willy (0)'},
+  {id:'m14',round:3,format:'Singles F9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9,time:'8:50 AM',playersA:'Rick (5)',playersB:'Will (12)'},
+  {id:'m15',round:3,format:'Singles F9',sideA:'Brent',sideB:'TFarm',teamA:'T6',teamB:'T1',holes:9,time:'9:00 AM',playersA:'Brent (0)',playersB:'TFarm (2)'},
+  {id:'m16',round:3,format:'Singles F9',sideA:'Jeff',sideB:'Hugh',teamA:'T6',teamB:'T8',holes:9,time:'9:00 AM',playersA:'Jeff (6)',playersB:'Hugh (8)'},
+  {id:'m17',round:3,format:'Singles B9',sideA:'Borden',sideB:'McCoy',teamA:'T4',teamB:'T2',holes:9,time:'8:30 AM',playersA:'Borden (1)',playersB:'McCoy (0)'},
+  {id:'m18',round:3,format:'Singles B9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9,time:'8:30 AM',playersA:'Phil (17)',playersB:'Cuz (13)'},
+  {id:'m19',round:3,format:'Singles B9',sideA:'Merman',sideB:'Chris',teamA:'T8',teamB:'T7',holes:9,time:'8:40 AM',playersA:'Merman (0)',playersB:'Chris (2)'},
+  {id:'m20',round:3,format:'Singles B9',sideA:'Hugh',sideB:'Waldrip',teamA:'T8',teamB:'T5',holes:9,time:'8:40 AM',playersA:'Hugh (8)',playersB:'Waldrip (6)'},
+  {id:'m21',round:3,format:'Singles B9',sideA:'Peter',sideB:'TFarm',teamA:'T5',teamB:'T1',holes:9,time:'8:50 AM',playersA:'Peter (0)',playersB:'TFarm (2)'},
+  {id:'m22',round:3,format:'Singles B9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9,time:'8:50 AM',playersA:'Rick (5)',playersB:'Will (12)'},
+  {id:'m23',round:3,format:'Singles B9',sideA:'Brent',sideB:'Willy',teamA:'T6',teamB:'T3',holes:9,time:'9:00 AM',playersA:'Brent (0)',playersB:'Willy (0)'},
+  {id:'m24',round:3,format:'Singles B9',sideA:'Will',sideB:'Cuz',teamA:'T7',teamB:'T3',holes:9,time:'9:00 AM',playersA:'Will (12)',playersB:'Cuz (13)'},
+  {id:'m25',round:4,format:'Alt Shot',sideA:'Brent & Jeff',sideB:'Borden & Phil',teamA:'T6',teamB:'T4',holes:18,time:'1:30 PM',playersA:'Brent & Jeff',playersB:'Borden & Phil'},
+  {id:'m26',round:4,format:'Alt Shot',sideA:'Merman & Hugh',sideB:'McCoy & TJ',teamA:'T8',teamB:'T2',holes:18,time:'1:40 PM',playersA:'Merman & Hugh',playersB:'McCoy & TJ'},
+  {id:'m27',round:4,format:'Alt Shot',sideA:'Peter & Waldrip',sideB:'TFarm & Rick',teamA:'T5',teamB:'T1',holes:18,time:'1:50 PM',playersA:'Peter & Waldrip',playersB:'TFarm & Rick'},
+  {id:'m28',round:4,format:'Alt Shot',sideA:'Willy & Cuz',sideB:'Chris & Will',teamA:'T3',teamB:'T7',holes:18,time:'2:00 PM',playersA:'Willy & Cuz',playersB:'Chris & Will'}
 ];
 
 let scores = JSON.parse(localStorage.getItem('tigerfest_scores') || '{}');
@@ -212,12 +251,10 @@ function renderLeaderboard() {
       <div class="pts">${fmtPts(t.pts)}</div>
     </div>`;
   }).join('');
-
   const top4 = ranked.slice(0,4).filter(t => t.pts > 0);
   document.getElementById('playoff-teams').innerHTML = top4.length
     ? top4.map(t => `<div class="playoff-team-pill">${t.name}</div>`).join('')
     : '<div class="no-playoff">Scores pending...</div>';
-
   renderDayBoard('friday-lb-rows','friday-leader-badge',[1,2],'friday-pts','friday-badge','🏅 Fri Leader');
   renderDayBoard('saturday-lb-rows','saturday-leader-badge',[3,4],'saturday-pts','saturday-badge','🏅 Sat Leader');
 }
@@ -244,11 +281,19 @@ function renderMatches(round, containerId) {
     const sA = scores[m.id+'_A'] !== undefined ? scores[m.id+'_A'] : '';
     const sB = scores[m.id+'_B'] !== undefined ? scores[m.id+'_B'] : '';
     return `<div class="match-card">
-      <div class="match-format">${m.format} · ${m.holes} holes · max ${m.holes} pts</div>
+      <div class="match-meta">
+        <span class="match-format">${m.format} · ${m.holes} holes</span>
+        <span class="tee-time">⏰ ${m.time}</span>
+      </div>
       <div class="match-row">
         <div class="match-team">${m.sideA}</div>
         <div class="match-vs">vs</div>
         <div class="match-team right">${m.sideB}</div>
+      </div>
+      <div class="player-row">
+        <div class="player-info">${m.playersA}</div>
+        <div></div>
+        <div class="player-info right">${m.playersB}</div>
       </div>
       <div class="score-inputs">
         <div class="score-input-wrap">
