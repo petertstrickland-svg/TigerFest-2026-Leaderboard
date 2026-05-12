@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TigerFest">
+<title>TigerFest 2026</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f4f0; min-height: 100vh; }
+.app { max-width: 480px; margin: 0 auto; padding: 0 0 3rem; }
+
+.header { background: #1a472a; color: white; padding: 1.25rem 1.25rem 0.75rem; text-align: center; }
+.header h1 { font-size: 22px; font-weight: 600; letter-spacing: 0.5px; }
+.header p { font-size: 12px; opacity: 0.7; margin-top: 3px; }
+
+.tabs { display: flex; background: #1a472a; border-bottom: 2px solid #c9a84c; }
+.tab { flex: 1; padding: 10px 4px; text-align: center; font-size: 13px; color: rgba(255,255,255,0.6); cursor: pointer; border: none; background: none; transition: all 0.15s; font-family: inherit; }
+.tab.active { color: #c9a84c; border-bottom: 2px solid #c9a84c; margin-bottom: -2px; font-weight: 600; }
+
+.section { display: none; padding: 0.875rem; }
+.section.active { display: block; }
+
+/* Leaderboard */
+.leaderboard-card { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 0.875rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.lb-header { display: grid; grid-template-columns: 36px 1fr 60px; gap: 6px; padding: 8px 14px; background: #f4f4f0; font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
+.lb-row { display: grid; grid-template-columns: 36px 1fr 60px; gap: 6px; padding: 11px 14px; border-top: 1px solid #f0f0ec; align-items: center; }
+.lb-row.playoff { border-left: 3px solid #c9a84c; padding-left: 11px; }
+.rank { font-size: 13px; font-weight: 600; color: #aaa; text-align: center; }
+.rank.top { color: #c9a84c; }
+.team-name { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+.playoff-badge { font-size: 9px; background: #c9a84c; color: #412402; padding: 1px 6px; border-radius: 3px; display: inline-block; margin-top: 2px; font-weight: 600; letter-spacing: 0.3px; }
+.pts { font-size: 16px; font-weight: 700; text-align: center; color: #1a472a; }
+
+.playoff-section { background: #1a472a; border-radius: 12px; padding: 1rem 1.25rem; text-align: center; }
+.playoff-section h3 { color: #c9a84c; font-size: 14px; font-weight: 600; margin-bottom: 0.625rem; }
+.playoff-teams { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.playoff-team-pill { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: #c9a84c; font-size: 12px; padding: 5px 12px; border-radius: 20px; font-weight: 500; }
+.no-playoff { color: rgba(255,255,255,0.45); font-size: 13px; }
+
+/* Matches */
+.round-label { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.7px; margin: 0.875rem 0 0.5rem; padding: 0 2px; display: flex; align-items: center; gap: 8px; }
+.round-label span { flex: 1; height: 1px; background: #e8e8e4; }
+
+.match-card { background: white; border-radius: 12px; padding: 0.875rem 1rem; margin-bottom: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
+.match-format { font-size: 10px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.match-row { display: grid; grid-template-columns: 1fr 36px 1fr; align-items: center; gap: 6px; }
+.match-team { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+.match-team.right { text-align: right; }
+.match-vs { text-align: center; font-size: 11px; color: #bbb; font-weight: 500; }
+
+.score-inputs { display: grid; grid-template-columns: 1fr 24px 1fr; gap: 6px; margin-top: 10px; align-items: center; }
+.score-input-wrap { display: flex; flex-direction: column; gap: 3px; }
+.score-input-wrap label { font-size: 10px; color: #aaa; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; }
+.score-input-wrap input {
+  width: 100%; padding: 7px 8px;
+  border: 1.5px solid #e8e8e4; border-radius: 8px;
+  font-size: 15px; text-align: center;
+  background: #fafaf8; color: #1a1a1a;
+  font-family: inherit; font-weight: 600;
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
+}
+.score-input-wrap input:focus { outline: none; border-color: #1a472a; background: white; }
+.score-sep { text-align: center; font-size: 14px; color: #ccc; }
+.singles-note { font-size: 11px; color: #aaa; margin-top: 8px; padding-top: 8px; border-top: 1px solid #f0f0ec; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <h1>🏌️ TigerFest 2026</h1>
+    <p>May 29–30 · Match Play</p>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('leaderboard', this)">Leaderboard</button>
+    <button class="tab" onclick="showTab('friday', this)">Friday</button>
+    <button class="tab" onclick="showTab('saturday', this)">Saturday</button>
+  </div>
+
+  <div id="leaderboard" class="section active">
+    <div class="leaderboard-card">
+      <div class="lb-header">
+        <div>#</div><div>Team</div><div style="text-align:center">Pts</div>
+      </div>
+      <div id="lb-rows"></div>
+    </div>
+    <div class="playoff-section">
+      <h3>🏆 Playoff Bound (Top 4)</h3>
+      <div id="playoff-teams" class="playoff-teams"></div>
+    </div>
+  </div>
+
+  <div id="friday" class="section">
+    <div class="round-label">Round 1 — Fourball <span></span> 18 holes</div>
+    <div id="r1-matches"></div>
+    <div class="round-label">Round 2 — Scramble <span></span> 18 holes</div>
+    <div id="r2-matches"></div>
+  </div>
+
+  <div id="saturday" class="section">
+    <div class="round-label">Round 3 — Singles <span></span> Front 9 + Back 9</div>
+    <div id="r3-matches"></div>
+    <div class="round-label">Round 4 — Alternate Shot <span></span> 18 holes</div>
+    <div id="r4-matches"></div>
+  </div>
+</div>
+
+<script>
+const TEAMS = [
+  {id:'T1',name:'TFarm & Rick'},{id:'T2',name:'McCoy & TJ'},{id:'T3',name:'Willy & Cuz'},
+  {id:'T4',name:'Borden & Phil'},{id:'T5',name:'Peter & Waldrip'},{id:'T6',name:'Brent & Jeff'},
+  {id:'T7',name:'Chris & Will'},{id:'T8',name:'Merman & Hugh'}
+];
+const MATCHES = [
+  {id:'m1',round:1,format:'Fourball',sideA:'Borden & Phil',sideB:'Merman & Hugh',teamA:'T4',teamB:'T8',holes:18},
+  {id:'m2',round:1,format:'Fourball',sideA:'TFarm & Rick',sideB:'McCoy & TJ',teamA:'T1',teamB:'T2',holes:18},
+  {id:'m3',round:1,format:'Fourball',sideA:'Willy & Cuz',sideB:'Peter & Waldrip',teamA:'T3',teamB:'T5',holes:18},
+  {id:'m4',round:1,format:'Fourball',sideA:'Chris & Will',sideB:'Brent & Jeff',teamA:'T7',teamB:'T6',holes:18},
+  {id:'m5',round:2,format:'Scramble',sideA:'Willy & Cuz',sideB:'Borden & Phil',teamA:'T3',teamB:'T4',holes:18},
+  {id:'m6',round:2,format:'Scramble',sideA:'Merman & Hugh',sideB:'TFarm & Rick',teamA:'T8',teamB:'T1',holes:18},
+  {id:'m7',round:2,format:'Scramble',sideA:'Brent & Jeff',sideB:'Peter & Waldrip',teamA:'T6',teamB:'T5',holes:18},
+  {id:'m8',round:2,format:'Scramble',sideA:'Chris & Will',sideB:'McCoy & TJ',teamA:'T7',teamB:'T2',holes:18},
+  {id:'m9',round:3,format:'Singles F9',sideA:'Borden',sideB:'Chris',teamA:'T4',teamB:'T7',holes:9},
+  {id:'m10',round:3,format:'Singles F9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9},
+  {id:'m11',round:3,format:'Singles F9',sideA:'McCoy',sideB:'Merman',teamA:'T2',teamB:'T8',holes:9},
+  {id:'m12',round:3,format:'Singles F9',sideA:'TJ',sideB:'Waldrip',teamA:'T2',teamB:'T5',holes:9},
+  {id:'m13',round:3,format:'Singles F9',sideA:'Peter',sideB:'Willy',teamA:'T5',teamB:'T3',holes:9},
+  {id:'m14',round:3,format:'Singles F9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9},
+  {id:'m15',round:3,format:'Singles F9',sideA:'Brent',sideB:'TFarm',teamA:'T6',teamB:'T1',holes:9},
+  {id:'m16',round:3,format:'Singles F9',sideA:'Jeff',sideB:'Hugh',teamA:'T6',teamB:'T8',holes:9},
+  {id:'m17',round:3,format:'Singles B9',sideA:'Borden',sideB:'McCoy',teamA:'T4',teamB:'T2',holes:9},
+  {id:'m18',round:3,format:'Singles B9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9},
+  {id:'m19',round:3,format:'Singles B9',sideA:'Merman',sideB:'Chris',teamA:'T8',teamB:'T7',holes:9},
+  {id:'m20',round:3,format:'Singles B9',sideA:'Hugh',sideB:'Waldrip',teamA:'T8',teamB:'T5',holes:9},
+  {id:'m21',round:3,format:'Singles B9',sideA:'Peter',sideB:'TFarm',teamA:'T5',teamB:'T1',holes:9},
+  {id:'m22',round:3,format:'Singles B9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9},
+  {id:'m23',round:3,format:'Singles B9',sideA:'Brent',sideB:'Willy',teamA:'T6',teamB:'T3',holes:9},
+  {id:'m24',round:3,format:'Singles B9',sideA:'Will',sideB:'Cuz',teamA:'T7',teamB:'T3',holes:9},
+  {id:'m25',round:4,format:'Alt Shot',sideA:'Brent & Jeff',sideB:'Borden & Phil',teamA:'T6',teamB:'T4',holes:18},
+  {id:'m26',round:4,format:'Alt Shot',sideA:'Merman & Hugh',sideB:'McCoy & TJ',teamA:'T8',teamB:'T2',holes:18},
+  {id:'m27',round:4,format:'Alt Shot',sideA:'Peter & Waldrip',sideB:'TFarm & Rick',teamA:'T5',teamB:'T1',holes:18},
+  {id:'m28',round:4,format:'Alt Shot',sideA:'Willy & Cuz',sideB:'Chris & Will',teamA:'T3',teamB:'T7',holes:18}
+];
+
+let scores = JSON.parse(localStorage.getItem('tigerfest_scores') || '{}');
+function save() { try { localStorage.setItem('tigerfest_scores', JSON.stringify(scores)); } catch(e){} }
+
+function calcTeamPoints() {
+  return TEAMS.map(t => {
+    let pts = 0;
+    MATCHES.forEach(m => {
+      if (m.teamA === t.id) pts += parseFloat(scores[m.id+'_A']) || 0;
+      if (m.teamB === t.id) pts += parseFloat(scores[m.id+'_B']) || 0;
+    });
+    return { ...t, pts };
+  }).sort((a,b) => b.pts - a.pts || a.name.localeCompare(b.name));
+}
+
+function renderLeaderboard() {
+  const ranked = calcTeamPoints();
+  document.getElementById('lb-rows').innerHTML = ranked.map((t, i) => {
+    const rank = i+1;
+    const isPlayoff = rank <= 4;
+    return `<div class="lb-row${isPlayoff?' playoff':''}">
+      <div class="rank${rank<=4?' top':''}">${rank}</div>
+      <div>
+        <div class="team-name">${t.name}</div>
+        ${isPlayoff?'<div><span class="playoff-badge">PLAYOFF</span></div>':''}
+      </div>
+      <div class="pts">${t.pts % 1 === 0 ? t.pts : t.pts.toFixed(1)}</div>
+    </div>`;
+  }).join('');
+
+  const top4 = ranked.slice(0,4).filter(t => t.pts > 0);
+  document.getElementById('playoff-teams').innerHTML = top4.length
+    ? top4.map(t => `<div class="playoff-team-pill">${t.name}</div>`).join('')
+    : '<div class="no-playoff">Scores pending...</div>';
+}
+
+function renderMatches(round, containerId) {
+  document.getElementById(containerId).innerHTML = MATCHES.filter(m => m.round === round).map(m => {
+    const sA = scores[m.id+'_A'] !== undefined ? scores[m.id+'_A'] : '';
+    const sB = scores[m.id+'_B'] !== undefined ? scores[m.id+'_B'] : '';
+    return `<div class="match-card">
+      <div class="match-format">${m.format} · ${m.holes} holes · max ${m.holes} pts</div>
+      <div class="match-row">
+        <div class="match-team">${m.sideA}</div>
+        <div class="match-vs">vs</div>
+        <div class="match-team right">${m.sideB}</div>
+      </div>
+      <div class="score-inputs">
+        <div class="score-input-wrap">
+          <label>${m.sideA.split(' ')[0]} pts</label>
+          <input type="number" min="0" max="${m.holes}" step="0.5" value="${sA}" placeholder="0" oninput="updateScore('${m.id}','A',this.value)" />
+        </div>
+        <div class="score-sep">—</div>
+        <div class="score-input-wrap">
+          <label>${m.sideB.split(' ')[0]} pts</label>
+          <input type="number" min="0" max="${m.holes}" step="0.5" value="${sB}" placeholder="0" oninput="updateScore('${m.id}','B',this.value)" />
+        </div>
+      </div>
+      ${m.round===3?'<div class="singles-note">Points count toward each player\'s team total.</div>':''}
+    </div>`;
+  }).join('');
+}
+
+function updateScore(matchId, side, val) {
+  scores[matchId+'_'+side] = parseFloat(val) || 0;
+  save();
+  renderLeaderboard();
+}
+
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+renderLeaderboard();
+renderMatches(1,'r1-matches');
+renderMatches(2,'r2-matches');
+renderMatches(3,'r3-matches');
+renderMatches(4,'r4-matches');
+</script>
+</body>
+</html>
