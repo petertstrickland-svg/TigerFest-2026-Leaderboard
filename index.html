@@ -22,34 +22,46 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .section { display: none; padding: 0.875rem; }
 .section.active { display: block; }
 
-/* Leaderboard */
 .leaderboard-card { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 0.875rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.lb-header { display: grid; grid-template-columns: 36px 1fr 60px; gap: 6px; padding: 8px 14px; background: #f4f4f0; font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
-.lb-row { display: grid; grid-template-columns: 36px 1fr 60px; gap: 6px; padding: 11px 14px; border-top: 1px solid #f0f0ec; align-items: center; }
+.lb-header { display: grid; grid-template-columns: 36px 1fr 70px; gap: 6px; padding: 8px 14px; background: #f4f4f0; font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
+.lb-row { display: grid; grid-template-columns: 36px 1fr 70px; gap: 6px; padding: 11px 14px; border-top: 1px solid #f0f0ec; align-items: center; }
 .lb-row.playoff { border-left: 3px solid #c9a84c; padding-left: 11px; }
 .rank { font-size: 13px; font-weight: 600; color: #aaa; text-align: center; }
 .rank.top { color: #c9a84c; }
 .team-name { font-size: 14px; font-weight: 600; color: #1a1a1a; }
-.playoff-badge { font-size: 9px; background: #c9a84c; color: #412402; padding: 1px 6px; border-radius: 3px; display: inline-block; margin-top: 2px; font-weight: 600; letter-spacing: 0.3px; }
+.playoff-badge { font-size: 9px; background: #c9a84c; color: #412402; padding: 1px 6px; border-radius: 3px; display: inline-block; margin-top: 2px; font-weight: 600; }
 .pts { font-size: 16px; font-weight: 700; text-align: center; color: #1a472a; }
 
-.playoff-section { background: #1a472a; border-radius: 12px; padding: 1rem 1.25rem; text-align: center; }
+.playoff-section { background: #1a472a; border-radius: 12px; padding: 1rem 1.25rem; text-align: center; margin-bottom: 0.875rem; }
 .playoff-section h3 { color: #c9a84c; font-size: 14px; font-weight: 600; margin-bottom: 0.625rem; }
 .playoff-teams { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
 .playoff-team-pill { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: #c9a84c; font-size: 12px; padding: 5px 12px; border-radius: 20px; font-weight: 500; }
 .no-playoff { color: rgba(255,255,255,0.45); font-size: 13px; }
 
-/* Matches */
+.day-section { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 0.875rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.day-header { padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; }
+.day-title { font-size: 13px; font-weight: 700; color: #1a1a1a; }
+.day-subtitle { font-size: 11px; color: #999; margin-top: 1px; }
+.day-leader-badge { font-size: 10px; padding: 3px 9px; border-radius: 10px; font-weight: 600; white-space: nowrap; }
+.friday-badge { background: #dbeafe; color: #1e40af; }
+.saturday-badge { background: #dcfce7; color: #166534; }
+.day-lb-header { display: grid; grid-template-columns: 28px 1fr 50px; gap: 4px; padding: 5px 14px; background: #f4f4f0; font-size: 10px; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; border-top: 1px solid #f0f0ec; }
+.day-lb-row { display: grid; grid-template-columns: 28px 1fr 50px; gap: 4px; padding: 8px 14px; border-top: 1px solid #f0f0ec; align-items: center; }
+.day-lb-row.leader { background: #fafaf8; }
+.day-rank { font-size: 12px; color: #bbb; text-align: center; font-weight: 600; }
+.day-team { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+.day-pts { font-size: 14px; font-weight: 700; text-align: center; }
+.friday-pts { color: #1e40af; }
+.saturday-pts { color: #166534; }
+
 .round-label { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.7px; margin: 0.875rem 0 0.5rem; padding: 0 2px; display: flex; align-items: center; gap: 8px; }
 .round-label span { flex: 1; height: 1px; background: #e8e8e4; }
-
 .match-card { background: white; border-radius: 12px; padding: 0.875rem 1rem; margin-bottom: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
 .match-format { font-size: 10px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
 .match-row { display: grid; grid-template-columns: 1fr 36px 1fr; align-items: center; gap: 6px; }
 .match-team { font-size: 13px; font-weight: 600; color: #1a1a1a; }
 .match-team.right { text-align: right; }
 .match-vs { text-align: center; font-size: 11px; color: #bbb; font-weight: 500; }
-
 .score-inputs { display: grid; grid-template-columns: 1fr 24px 1fr; gap: 6px; margin-top: 10px; align-items: center; }
 .score-input-wrap { display: flex; flex-direction: column; gap: 3px; }
 .score-input-wrap label { font-size: 10px; color: #aaa; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; }
@@ -82,13 +94,38 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <div id="leaderboard" class="section active">
     <div class="leaderboard-card">
       <div class="lb-header">
-        <div>#</div><div>Team</div><div style="text-align:center">Pts</div>
+        <div>#</div><div>Team</div><div style="text-align:center">Total Pts</div>
       </div>
       <div id="lb-rows"></div>
     </div>
+
     <div class="playoff-section">
       <h3>🏆 Playoff Bound (Top 4)</h3>
       <div id="playoff-teams" class="playoff-teams"></div>
+    </div>
+
+    <div class="day-section">
+      <div class="day-header">
+        <div>
+          <div class="day-title">📅 Friday May 29</div>
+          <div class="day-subtitle">Rounds 1 & 2 · Fourball + Scramble</div>
+        </div>
+        <div id="friday-leader-badge"></div>
+      </div>
+      <div class="day-lb-header"><div>#</div><div>Team</div><div style="text-align:center">Pts</div></div>
+      <div id="friday-lb-rows"></div>
+    </div>
+
+    <div class="day-section">
+      <div class="day-header">
+        <div>
+          <div class="day-title">📅 Saturday May 30</div>
+          <div class="day-subtitle">Rounds 3 & 4 · Singles + Alt Shot</div>
+        </div>
+        <div id="saturday-leader-badge"></div>
+      </div>
+      <div class="day-lb-header"><div>#</div><div>Team</div><div style="text-align:center">Pts</div></div>
+      <div id="saturday-lb-rows"></div>
     </div>
   </div>
 
@@ -146,30 +183,33 @@ const MATCHES = [
 
 let scores = JSON.parse(localStorage.getItem('tigerfest_scores') || '{}');
 function save() { try { localStorage.setItem('tigerfest_scores', JSON.stringify(scores)); } catch(e){} }
+function fmtPts(p) { return p % 1 === 0 ? p : p.toFixed(1); }
 
-function calcTeamPoints() {
-  return TEAMS.map(t => {
-    let pts = 0;
-    MATCHES.forEach(m => {
-      if (m.teamA === t.id) pts += parseFloat(scores[m.id+'_A']) || 0;
-      if (m.teamB === t.id) pts += parseFloat(scores[m.id+'_B']) || 0;
-    });
-    return { ...t, pts };
-  }).sort((a,b) => b.pts - a.pts || a.name.localeCompare(b.name));
+function calcPts(teamId, rounds) {
+  let pts = 0;
+  MATCHES.filter(m => rounds.includes(m.round)).forEach(m => {
+    if (m.teamA === teamId) pts += parseFloat(scores[m.id+'_A']) || 0;
+    if (m.teamB === teamId) pts += parseFloat(scores[m.id+'_B']) || 0;
+  });
+  return pts;
+}
+
+function rankTeams(rounds) {
+  return TEAMS.map(t => ({ ...t, pts: calcPts(t.id, rounds) }))
+    .sort((a,b) => b.pts - a.pts || a.name.localeCompare(b.name));
 }
 
 function renderLeaderboard() {
-  const ranked = calcTeamPoints();
+  const ranked = rankTeams([1,2,3,4]);
   document.getElementById('lb-rows').innerHTML = ranked.map((t, i) => {
-    const rank = i+1;
-    const isPlayoff = rank <= 4;
+    const rank = i+1, isPlayoff = rank <= 4;
     return `<div class="lb-row${isPlayoff?' playoff':''}">
       <div class="rank${rank<=4?' top':''}">${rank}</div>
       <div>
         <div class="team-name">${t.name}</div>
         ${isPlayoff?'<div><span class="playoff-badge">PLAYOFF</span></div>':''}
       </div>
-      <div class="pts">${t.pts % 1 === 0 ? t.pts : t.pts.toFixed(1)}</div>
+      <div class="pts">${fmtPts(t.pts)}</div>
     </div>`;
   }).join('');
 
@@ -177,6 +217,26 @@ function renderLeaderboard() {
   document.getElementById('playoff-teams').innerHTML = top4.length
     ? top4.map(t => `<div class="playoff-team-pill">${t.name}</div>`).join('')
     : '<div class="no-playoff">Scores pending...</div>';
+
+  renderDayBoard('friday-lb-rows','friday-leader-badge',[1,2],'friday-pts','friday-badge','🏅 Fri Leader');
+  renderDayBoard('saturday-lb-rows','saturday-leader-badge',[3,4],'saturday-pts','saturday-badge','🏅 Sat Leader');
+}
+
+function renderDayBoard(rowsId, badgeId, rounds, ptsClass, badgeClass, label) {
+  const ranked = rankTeams(rounds);
+  const hasScores = ranked[0].pts > 0;
+  const leadPts = ranked[0].pts;
+  document.getElementById(rowsId).innerHTML = ranked.map((t, i) => {
+    const isLeader = hasScores && t.pts === leadPts;
+    return `<div class="day-lb-row${isLeader?' leader':''}">
+      <div class="day-rank">${i+1}</div>
+      <div class="day-team">${t.name}${isLeader?' 👑':''}</div>
+      <div class="day-pts ${ptsClass}">${fmtPts(t.pts)}</div>
+    </div>`;
+  }).join('');
+  document.getElementById(badgeId).innerHTML = hasScores
+    ? `<span class="day-leader-badge ${badgeClass}">${label}: ${ranked[0].name.split(' ')[0]}</span>`
+    : '';
 }
 
 function renderMatches(round, containerId) {
