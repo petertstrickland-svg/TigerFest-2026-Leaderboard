@@ -14,6 +14,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .header { background: #1a472a; color: white; padding: 1.25rem 1.25rem 0.75rem; text-align: center; }
 .header h1 { font-size: 22px; font-weight: 600; letter-spacing: 0.5px; }
 .header p { font-size: 12px; opacity: 0.7; margin-top: 3px; }
+.sync-status { font-size: 11px; margin-top: 5px; }
+.sync-status.connected { color: #86efac; }
+.sync-status.disconnected { color: #fca5a5; }
 
 .tabs { display: flex; background: #1a472a; border-bottom: 2px solid #c9a84c; }
 .tab { flex: 1; padding: 9px 2px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.6); cursor: pointer; border: none; background: none; transition: all 0.15s; font-family: inherit; }
@@ -103,6 +106,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <div class="header">
     <h1>🏌️ TigerFest 2026</h1>
     <p>May 28–30 · Match Play</p>
+    <div id="sync-status" class="sync-status">Connecting...</div>
   </div>
   <div class="tabs">
     <button class="tab" onclick="showTab('thursday', this)">Thursday</button>
@@ -183,7 +187,24 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   </div>
 </div>
 
-<script>
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, onValue, set, onDisconnect, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDZWIr0Z5QV8sSNyocPIivVA2okp31x6OE",
+  authDomain: "tigerfest-2026-leaderboard.firebaseapp.com",
+  databaseURL: "https://tigerfest-2026-leaderboard-default-rtdb.firebaseio.com",
+  projectId: "tigerfest-2026-leaderboard",
+  storageBucket: "tigerfest-2026-leaderboard.firebasestorage.app",
+  messagingSenderId: "193942777542",
+  appId: "1:193942777542:web:30f273eab4776c6318b1c7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
 const TEAMS = [
   {id:'T1',name:'TFarm & Rick'},{id:'T2',name:'McCoy & TJ'},{id:'T3',name:'Willy & Cuz'},
   {id:'T4',name:'Borden & Phil'},{id:'T5',name:'Peter & Waldrip'},{id:'T6',name:'Brent & Jeff'},
@@ -220,8 +241,29 @@ const MATCHES = [
   {id:'m28',round:4,format:'Alt Shot',sideA:'Willy & Cuz',sideB:'Chris & Will',teamA:'T3',teamB:'T7',holes:18,time:'2:00 PM',playersA:'Willy & Cuz',playersB:'Chris & Will'}
 ];
 
-let scores = JSON.parse(localStorage.getItem('tigerfest_scores') || '{}');
-function save() { try { localStorage.setItem('tigerfest_scores', JSON.stringify(scores)); } catch(e){} }
+let scores = {};
+
+// Connection status
+const connectedRef = ref(db, '.info/connected');
+onValue(connectedRef, (snap) => {
+  const statusEl = document.getElementById('sync-status');
+  if (snap.val() === true) {
+    statusEl.textContent = '🟢 Live — scores sync across all devices';
+    statusEl.className = 'sync-status connected';
+  } else {
+    statusEl.textContent = '🔴 Offline — reconnecting...';
+    statusEl.className = 'sync-status disconnected';
+  }
+});
+
+// Listen for score changes from Firebase — updates everyone in real time
+const scoresRef = ref(db, 'scores');
+onValue(scoresRef, (snapshot) => {
+  scores = snapshot.val() || {};
+  renderLeaderboard();
+  renderAllInputs();
+});
+
 function fmtPts(p) { return p % 1 === 0 ? p : p.toFixed(1); }
 
 function calcPts(teamId, rounds) {
@@ -276,6 +318,16 @@ function renderDayBoard(rowsId, badgeId, rounds, ptsClass, badgeClass, label) {
     : '';
 }
 
+function renderAllInputs() {
+  // Update input values without re-rendering the whole card (avoids cursor jumping)
+  MATCHES.forEach(m => {
+    const inA = document.getElementById('input_'+m.id+'_A');
+    const inB = document.getElementById('input_'+m.id+'_B');
+    if (inA && document.activeElement !== inA) inA.value = scores[m.id+'_A'] !== undefined ? scores[m.id+'_A'] : '';
+    if (inB && document.activeElement !== inB) inB.value = scores[m.id+'_B'] !== undefined ? scores[m.id+'_B'] : '';
+  });
+}
+
 function renderMatches(round, containerId) {
   document.getElementById(containerId).innerHTML = MATCHES.filter(m => m.round === round).map(m => {
     const sA = scores[m.id+'_A'] !== undefined ? scores[m.id+'_A'] : '';
@@ -298,12 +350,12 @@ function renderMatches(round, containerId) {
       <div class="score-inputs">
         <div class="score-input-wrap">
           <label>${m.sideA.split(' ')[0]} pts</label>
-          <input type="number" min="0" max="${m.holes}" step="0.5" value="${sA}" placeholder="0" oninput="updateScore('${m.id}','A',this.value)" />
+          <input id="input_${m.id}_A" type="number" min="0" max="${m.holes}" step="0.5" value="${sA}" placeholder="0" oninput="window.updateScore('${m.id}','A',this.value)" />
         </div>
         <div class="score-sep">—</div>
         <div class="score-input-wrap">
           <label>${m.sideB.split(' ')[0]} pts</label>
-          <input type="number" min="0" max="${m.holes}" step="0.5" value="${sB}" placeholder="0" oninput="updateScore('${m.id}','B',this.value)" />
+          <input id="input_${m.id}_B" type="number" min="0" max="${m.holes}" step="0.5" value="${sB}" placeholder="0" oninput="window.updateScore('${m.id}','B',this.value)" />
         </div>
       </div>
       ${m.round===3?'<div class="singles-note">Points count toward each player\'s team total.</div>':''}
@@ -311,18 +363,19 @@ function renderMatches(round, containerId) {
   }).join('');
 }
 
-function updateScore(matchId, side, val) {
-  scores[matchId+'_'+side] = parseFloat(val) || 0;
-  save();
-  renderLeaderboard();
-}
+// Save score to Firebase — syncs to all devices instantly
+window.updateScore = function(matchId, side, val) {
+  const key = matchId + '_' + side;
+  const numVal = parseFloat(val) || 0;
+  set(ref(db, 'scores/' + key), numVal);
+};
 
-function showTab(id, btn) {
+window.showTab = function(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-}
+};
 
 renderLeaderboard();
 renderMatches(1,'r1-matches');
