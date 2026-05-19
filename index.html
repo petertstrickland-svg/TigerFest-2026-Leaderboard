@@ -25,7 +25,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .section { display: none; padding: 0.875rem; }
 .section.active { display: block; }
 
-/* Leaderboard */
 .leaderboard-card { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 0.875rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .lb-header { display: grid; grid-template-columns: 36px 1fr 70px; gap: 6px; padding: 8px 14px; background: #f4f4f0; font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
 .lb-row { display: grid; grid-template-columns: 36px 1fr 70px; gap: 6px; padding: 11px 14px; border-top: 1px solid #f0f0ec; align-items: center; }
@@ -42,7 +41,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .playoff-team-pill { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: #c9a84c; font-size: 12px; padding: 5px 12px; border-radius: 20px; font-weight: 500; }
 .no-playoff { color: rgba(255,255,255,0.45); font-size: 13px; }
 
-/* Daily leaderboards */
 .day-section { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 0.875rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .day-header { padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; }
 .day-title { font-size: 13px; font-weight: 700; color: #1a1a1a; }
@@ -59,7 +57,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .friday-pts { color: #1e40af; }
 .saturday-pts { color: #166534; }
 
-/* Match cards */
 .round-label { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.7px; margin: 0.875rem 0 0.5rem; padding: 0 2px; display: flex; align-items: center; gap: 8px; }
 .round-label span { flex: 1; height: 1px; background: #e8e8e4; }
 .match-card { background: white; border-radius: 12px; padding: 0.875rem 1rem; margin-bottom: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
@@ -89,7 +86,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .score-sep { text-align: center; font-size: 14px; color: #ccc; }
 .singles-note { font-size: 11px; color: #aaa; margin-top: 8px; padding-top: 8px; border-top: 1px solid #f0f0ec; }
 
-/* Thursday */
 .thu-info { background: white; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 0.875rem; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .thu-info h3 { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
 .thu-info p { font-size: 12px; color: #999; }
@@ -115,7 +111,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <button class="tab" onclick="showTab('saturday', this)">Saturday</button>
   </div>
 
-  <!-- THURSDAY -->
   <div id="thursday" class="section">
     <div class="thu-info">
       <h3>⛳ Par 3 Captain's Choice</h3>
@@ -134,7 +129,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     </div>
   </div>
 
-  <!-- LEADERBOARD -->
   <div id="leaderboard" class="section active">
     <div class="leaderboard-card">
       <div class="lb-header">
@@ -170,7 +164,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     </div>
   </div>
 
-  <!-- FRIDAY -->
   <div id="friday" class="section">
     <div class="round-label">Round 1 — Fourball <span></span> 18 holes</div>
     <div id="r1-matches"></div>
@@ -178,7 +171,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div id="r2-matches"></div>
   </div>
 
-  <!-- SATURDAY -->
   <div id="saturday" class="section">
     <div class="round-label">Round 3 — Singles <span></span> Front 9 + Back 9</div>
     <div id="r3-matches"></div>
@@ -187,10 +179,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   </div>
 </div>
 
-<!-- Firebase -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, onValue, set, onDisconnect, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDZWIr0Z5QV8sSNyocPIivVA2okp31x6OE",
@@ -210,40 +201,45 @@ const TEAMS = [
   {id:'T4',name:'Borden & Phil'},{id:'T5',name:'Peter & Waldrip'},{id:'T6',name:'Brent & Jeff'},
   {id:'T7',name:'Chris & Will'},{id:'T8',name:'Merman & Hugh'}
 ];
+
 const MATCHES = [
-  {id:'m1',round:1,format:'Fourball',sideA:'Borden & Phil',sideB:'Merman & Hugh',teamA:'T4',teamB:'T8',holes:18,time:'8:30 AM',playersA:'Borden (1) & Phil (17)',playersB:'Merman (0) & Hugh (8)'},
-  {id:'m2',round:1,format:'Fourball',sideA:'TFarm & Rick',sideB:'McCoy & TJ',teamA:'T1',teamB:'T2',holes:18,time:'8:40 AM',playersA:'TFarm (2) & Rick (5)',playersB:'McCoy (0) & TJ (8)'},
-  {id:'m3',round:1,format:'Fourball',sideA:'Willy & Cuz',sideB:'Peter & Waldrip',teamA:'T3',teamB:'T5',holes:18,time:'8:50 AM',playersA:'Willy (0) & Cuz (13)',playersB:'Peter (0) & Waldrip (6)'},
+  // Round 1 - Fourball (strokes unchanged from original)
+  {id:'m1',round:1,format:'Fourball',sideA:'TFarm & Rick',sideB:'McCoy & TJ',teamA:'T1',teamB:'T2',holes:18,time:'8:30 AM',playersA:'TFarm (2) & Rick (5)',playersB:'McCoy (0) & TJ (8)'},
+  {id:'m2',round:1,format:'Fourball',sideA:'Willy & Cuz',sideB:'Peter & Waldrip',teamA:'T3',teamB:'T5',holes:18,time:'8:40 AM',playersA:'Willy (0) & Cuz (13)',playersB:'Peter (0) & Waldrip (6)'},
+  {id:'m3',round:1,format:'Fourball',sideA:'Borden & Phil',sideB:'Merman & Hugh',teamA:'T4',teamB:'T8',holes:18,time:'8:50 AM',playersA:'Borden (1) & Phil (17)',playersB:'Merman (0) & Hugh (8)'},
   {id:'m4',round:1,format:'Fourball',sideA:'Chris & Will',sideB:'Brent & Jeff',teamA:'T7',teamB:'T6',holes:18,time:'9:00 AM',playersA:'Chris (2) & Will (12)',playersB:'Brent (0) & Jeff (6)'},
-  {id:'m5',round:2,format:'Scramble',sideA:'Willy & Cuz',sideB:'Borden & Phil',teamA:'T3',teamB:'T4',holes:18,time:'1:30 PM',playersA:'Willy & Cuz',playersB:'Borden & Phil'},
-  {id:'m6',round:2,format:'Scramble',sideA:'Merman & Hugh',sideB:'TFarm & Rick',teamA:'T8',teamB:'T1',holes:18,time:'1:40 PM',playersA:'Merman & Hugh',playersB:'TFarm & Rick'},
-  {id:'m7',round:2,format:'Scramble',sideA:'Brent & Jeff',sideB:'Peter & Waldrip',teamA:'T6',teamB:'T5',holes:18,time:'1:50 PM',playersA:'Brent & Jeff',playersB:'Pete & Waldrip'},
-  {id:'m8',round:2,format:'Scramble',sideA:'Chris & Will',sideB:'McCoy & TJ',teamA:'T7',teamB:'T2',holes:18,time:'2:00 PM',playersA:'Chris & Will',playersB:'McCoy & TJ'},
-  {id:'m9',round:3,format:'Singles F9',sideA:'Borden',sideB:'Chris',teamA:'T4',teamB:'T7',holes:9,time:'8:30 AM',playersA:'Borden (1)',playersB:'Chris (2)'},
-  {id:'m10',round:3,format:'Singles F9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9,time:'8:30 AM',playersA:'Phil (17)',playersB:'Cuz (13)'},
-  {id:'m11',round:3,format:'Singles F9',sideA:'McCoy',sideB:'Merman',teamA:'T2',teamB:'T8',holes:9,time:'8:40 AM',playersA:'McCoy (0)',playersB:'Merman (0)'},
-  {id:'m12',round:3,format:'Singles F9',sideA:'TJ',sideB:'Waldrip',teamA:'T2',teamB:'T5',holes:9,time:'8:40 AM',playersA:'TJ (8)',playersB:'Waldrip (6)'},
+  // Round 2 - Scramble (corrected strokes)
+  {id:'m5',round:2,format:'Scramble',sideA:'Willy & Cuz',sideB:'Borden & Phil',teamA:'T3',teamB:'T4',holes:18,time:'1:30 PM',playersA:'Willy & Cuz (2)',playersB:'Borden & Phil (0)'},
+  {id:'m6',round:2,format:'Scramble',sideA:'Merman & Hugh',sideB:'TFarm & Rick',teamA:'T8',teamB:'T1',holes:18,time:'1:40 PM',playersA:'Merman & Hugh (0)',playersB:'TFarm & Rick (2)'},
+  {id:'m7',round:2,format:'Scramble',sideA:'Brent & Jeff',sideB:'Peter & Waldrip',teamA:'T6',teamB:'T5',holes:18,time:'1:50 PM',playersA:'Brent & Jeff (0)',playersB:'Pete & Waldrip (2)'},
+  {id:'m8',round:2,format:'Scramble',sideA:'Chris & Will',sideB:'McCoy & TJ',teamA:'T7',teamB:'T2',holes:18,time:'2:00 PM',playersA:'Chris & Will (0)',playersB:'McCoy & TJ (0)'},
+  // Round 3 - Singles Front 9 (corrected strokes, matchups unchanged)
+  {id:'m9',round:3,format:'Singles F9',sideA:'Borden',sideB:'Chris',teamA:'T4',teamB:'T7',holes:9,time:'8:30 AM',playersA:'Borden (0)',playersB:'Chris (2)'},
+  {id:'m10',round:3,format:'Singles F9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9,time:'8:30 AM',playersA:'Phil (0)',playersB:'Cuz (1)'},
+  {id:'m11',round:3,format:'Singles F9',sideA:'McCoy',sideB:'Merman',teamA:'T2',teamB:'T8',holes:9,time:'8:40 AM',playersA:'McCoy (2)',playersB:'Merman (0)'},
+  {id:'m12',round:3,format:'Singles F9',sideA:'TJ',sideB:'Waldrip',teamA:'T2',teamB:'T5',holes:9,time:'8:40 AM',playersA:'TJ (0)',playersB:'Waldrip (0)'},
   {id:'m13',round:3,format:'Singles F9',sideA:'Peter',sideB:'Willy',teamA:'T5',teamB:'T3',holes:9,time:'8:50 AM',playersA:'Peter (0)',playersB:'Willy (0)'},
-  {id:'m14',round:3,format:'Singles F9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9,time:'8:50 AM',playersA:'Rick (5)',playersB:'Will (12)'},
-  {id:'m15',round:3,format:'Singles F9',sideA:'Brent',sideB:'TFarm',teamA:'T6',teamB:'T1',holes:9,time:'9:00 AM',playersA:'Brent (0)',playersB:'TFarm (2)'},
-  {id:'m16',round:3,format:'Singles F9',sideA:'Jeff',sideB:'Hugh',teamA:'T6',teamB:'T8',holes:9,time:'9:00 AM',playersA:'Jeff (6)',playersB:'Hugh (8)'},
-  {id:'m17',round:3,format:'Singles B9',sideA:'Borden',sideB:'McCoy',teamA:'T4',teamB:'T2',holes:9,time:'8:30 AM',playersA:'Borden (1)',playersB:'McCoy (0)'},
-  {id:'m18',round:3,format:'Singles B9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9,time:'8:30 AM',playersA:'Phil (17)',playersB:'Cuz (13)'},
+  {id:'m14',round:3,format:'Singles F9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9,time:'8:50 AM',playersA:'Rick (0)',playersB:'Will (4)'},
+  {id:'m15',round:3,format:'Singles F9',sideA:'Brent',sideB:'TFarm',teamA:'T6',teamB:'T1',holes:9,time:'9:00 AM',playersA:'Brent (0)',playersB:'TFarm (0)'},
+  {id:'m16',round:3,format:'Singles F9',sideA:'Jeff',sideB:'Hugh',teamA:'T6',teamB:'T8',holes:9,time:'9:00 AM',playersA:'Jeff (0)',playersB:'Hugh (0)'},
+  // Round 3 - Singles Back 9 (corrected strokes, matchups unchanged)
+  {id:'m17',round:3,format:'Singles B9',sideA:'Borden',sideB:'McCoy',teamA:'T4',teamB:'T2',holes:9,time:'8:30 AM',playersA:'Borden (0)',playersB:'McCoy (1)'},
+  {id:'m18',round:3,format:'Singles B9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9,time:'8:30 AM',playersA:'Phil (0)',playersB:'Cuz (2)'},
   {id:'m19',round:3,format:'Singles B9',sideA:'Merman',sideB:'Chris',teamA:'T8',teamB:'T7',holes:9,time:'8:40 AM',playersA:'Merman (0)',playersB:'Chris (2)'},
-  {id:'m20',round:3,format:'Singles B9',sideA:'Hugh',sideB:'Waldrip',teamA:'T8',teamB:'T5',holes:9,time:'8:40 AM',playersA:'Hugh (8)',playersB:'Waldrip (6)'},
-  {id:'m21',round:3,format:'Singles B9',sideA:'Peter',sideB:'TFarm',teamA:'T5',teamB:'T1',holes:9,time:'8:50 AM',playersA:'Peter (0)',playersB:'TFarm (2)'},
-  {id:'m22',round:3,format:'Singles B9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9,time:'8:50 AM',playersA:'Rick (5)',playersB:'Will (12)'},
-  {id:'m23',round:3,format:'Singles B9',sideA:'Brent',sideB:'Willy',teamA:'T6',teamB:'T3',holes:9,time:'9:00 AM',playersA:'Brent (0)',playersB:'Willy (0)'},
-  {id:'m24',round:3,format:'Singles B9',sideA:'Will',sideB:'Cuz',teamA:'T7',teamB:'T3',holes:9,time:'9:00 AM',playersA:'Will (12)',playersB:'Cuz (13)'},
-  {id:'m25',round:4,format:'Alt Shot',sideA:'Brent & Jeff',sideB:'Borden & Phil',teamA:'T6',teamB:'T4',holes:18,time:'1:30 PM',playersA:'Brent & Jeff',playersB:'Borden & Phil'},
-  {id:'m26',round:4,format:'Alt Shot',sideA:'Merman & Hugh',sideB:'McCoy & TJ',teamA:'T8',teamB:'T2',holes:18,time:'1:40 PM',playersA:'Merman & Hugh',playersB:'McCoy & TJ'},
-  {id:'m27',round:4,format:'Alt Shot',sideA:'Peter & Waldrip',sideB:'TFarm & Rick',teamA:'T5',teamB:'T1',holes:18,time:'1:50 PM',playersA:'Peter & Waldrip',playersB:'TFarm & Rick'},
-  {id:'m28',round:4,format:'Alt Shot',sideA:'Willy & Cuz',sideB:'Chris & Will',teamA:'T3',teamB:'T7',holes:18,time:'2:00 PM',playersA:'Willy & Cuz',playersB:'Chris & Will'}
+  {id:'m20',round:3,format:'Singles B9',sideA:'Hugh',sideB:'Waldrip',teamA:'T8',teamB:'T5',holes:9,time:'8:40 AM',playersA:'Hugh (0)',playersB:'Waldrip (2)'},
+  {id:'m21',round:3,format:'Singles B9',sideA:'Peter',sideB:'TFarm',teamA:'T5',teamB:'T1',holes:9,time:'8:50 AM',playersA:'Peter (0)',playersB:'TFarm (0)'},
+  {id:'m22',round:3,format:'Singles B9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9,time:'8:50 AM',playersA:'Rick (0)',playersB:'Will (3)'},
+  {id:'m23',round:3,format:'Singles B9',sideA:'Brent',sideB:'Willy',teamA:'T6',teamB:'T3',holes:9,time:'9:00 AM',playersA:'Brent (0)',playersB:'Willy (2)'},
+  {id:'m24',round:3,format:'Singles B9',sideA:'Will',sideB:'Cuz',teamA:'T7',teamB:'T3',holes:9,time:'9:00 AM',playersA:'Will (0)',playersB:'Cuz (2)'},
+  // Round 4 - Alt Shot (corrected strokes)
+  {id:'m25',round:4,format:'Alt Shot',sideA:'Merman & Hugh',sideB:'McCoy & TJ',teamA:'T8',teamB:'T2',holes:18,time:'1:30 PM',playersA:'Merman & Hugh (0)',playersB:'McCoy & TJ (4)'},
+  {id:'m26',round:4,format:'Alt Shot',sideA:'Brent & Jeff',sideB:'Borden & Phil',teamA:'T6',teamB:'T4',holes:18,time:'1:40 PM',playersA:'Brent & Jeff (0)',playersB:'Borden & Phil (3)'},
+  {id:'m27',round:4,format:'Alt Shot',sideA:'Peter & Waldrip',sideB:'TFarm & Rick',teamA:'T5',teamB:'T1',holes:18,time:'1:50 PM',playersA:'Pete & Waldrip (1)',playersB:'TFarm & Rick (0)'},
+  {id:'m28',round:4,format:'Alt Shot',sideA:'Willy & Cuz',sideB:'Chris & Will',teamA:'T3',teamB:'T7',holes:18,time:'2:00 PM',playersA:'Willy & Cuz (3)',playersB:'Chris & Will (0)'}
 ];
 
 let scores = {};
 
-// Connection status
 const connectedRef = ref(db, '.info/connected');
 onValue(connectedRef, (snap) => {
   const statusEl = document.getElementById('sync-status');
@@ -256,7 +252,6 @@ onValue(connectedRef, (snap) => {
   }
 });
 
-// Listen for score changes from Firebase — updates everyone in real time
 const scoresRef = ref(db, 'scores');
 onValue(scoresRef, (snapshot) => {
   scores = snapshot.val() || {};
@@ -319,7 +314,6 @@ function renderDayBoard(rowsId, badgeId, rounds, ptsClass, badgeClass, label) {
 }
 
 function renderAllInputs() {
-  // Update input values without re-rendering the whole card (avoids cursor jumping)
   MATCHES.forEach(m => {
     const inA = document.getElementById('input_'+m.id+'_A');
     const inB = document.getElementById('input_'+m.id+'_B');
@@ -363,7 +357,6 @@ function renderMatches(round, containerId) {
   }).join('');
 }
 
-// Save score to Firebase — syncs to all devices instantly
 window.updateScore = function(matchId, side, val) {
   const key = matchId + '_' + side;
   const numVal = parseFloat(val) || 0;
