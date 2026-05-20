@@ -203,39 +203,47 @@ const TEAMS = [
 ];
 
 const MATCHES = [
-  // Round 1 - Fourball (strokes unchanged from original)
+  // Round 1 - Fourball
   {id:'m1',round:1,format:'Fourball',sideA:'TFarm & Rick',sideB:'McCoy & TJ',teamA:'T1',teamB:'T2',holes:18,time:'8:30 AM',playersA:'TFarm (2) & Rick (5)',playersB:'McCoy (0) & TJ (8)'},
   {id:'m2',round:1,format:'Fourball',sideA:'Willy & Cuz',sideB:'Peter & Waldrip',teamA:'T3',teamB:'T5',holes:18,time:'8:40 AM',playersA:'Willy (0) & Cuz (13)',playersB:'Peter (0) & Waldrip (6)'},
   {id:'m3',round:1,format:'Fourball',sideA:'Borden & Phil',sideB:'Merman & Hugh',teamA:'T4',teamB:'T8',holes:18,time:'8:50 AM',playersA:'Borden (1) & Phil (17)',playersB:'Merman (0) & Hugh (8)'},
   {id:'m4',round:1,format:'Fourball',sideA:'Chris & Will',sideB:'Brent & Jeff',teamA:'T7',teamB:'T6',holes:18,time:'9:00 AM',playersA:'Chris (2) & Will (12)',playersB:'Brent (0) & Jeff (6)'},
-  // Round 2 - Scramble (corrected strokes)
+  // Round 2 - Scramble
   {id:'m5',round:2,format:'Scramble',sideA:'Willy & Cuz',sideB:'Borden & Phil',teamA:'T3',teamB:'T4',holes:18,time:'1:30 PM',playersA:'Willy & Cuz (2)',playersB:'Borden & Phil (0)'},
   {id:'m6',round:2,format:'Scramble',sideA:'Merman & Hugh',sideB:'TFarm & Rick',teamA:'T8',teamB:'T1',holes:18,time:'1:40 PM',playersA:'Merman & Hugh (0)',playersB:'TFarm & Rick (2)'},
   {id:'m7',round:2,format:'Scramble',sideA:'Brent & Jeff',sideB:'Peter & Waldrip',teamA:'T6',teamB:'T5',holes:18,time:'1:50 PM',playersA:'Brent & Jeff (0)',playersB:'Pete & Waldrip (2)'},
   {id:'m8',round:2,format:'Scramble',sideA:'Chris & Will',sideB:'McCoy & TJ',teamA:'T7',teamB:'T2',holes:18,time:'2:00 PM',playersA:'Chris & Will (0)',playersB:'McCoy & TJ (0)'},
-  // Round 3 - Singles Front 9 (corrected strokes, matchups unchanged)
-  {id:'m9',round:3,format:'Singles F9',sideA:'Borden',sideB:'Chris',teamA:'T4',teamB:'T7',holes:9,time:'8:30 AM',playersA:'Borden (0)',playersB:'Chris (2)'},
-  {id:'m10',round:3,format:'Singles F9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9,time:'8:30 AM',playersA:'Phil (0)',playersB:'Cuz (1)'},
-  {id:'m11',round:3,format:'Singles F9',sideA:'McCoy',sideB:'Merman',teamA:'T2',teamB:'T8',holes:9,time:'8:40 AM',playersA:'McCoy (2)',playersB:'Merman (0)'},
-  {id:'m12',round:3,format:'Singles F9',sideA:'TJ',sideB:'Waldrip',teamA:'T2',teamB:'T5',holes:9,time:'8:40 AM',playersA:'TJ (0)',playersB:'Waldrip (0)'},
-  {id:'m13',round:3,format:'Singles F9',sideA:'Peter',sideB:'Willy',teamA:'T5',teamB:'T3',holes:9,time:'8:50 AM',playersA:'Peter (0)',playersB:'Willy (0)'},
-  {id:'m14',round:3,format:'Singles F9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9,time:'8:50 AM',playersA:'Rick (0)',playersB:'Will (4)'},
-  {id:'m15',round:3,format:'Singles F9',sideA:'Brent',sideB:'TFarm',teamA:'T6',teamB:'T1',holes:9,time:'9:00 AM',playersA:'Brent (0)',playersB:'TFarm (0)'},
-  {id:'m16',round:3,format:'Singles F9',sideA:'Jeff',sideB:'Hugh',teamA:'T6',teamB:'T8',holes:9,time:'9:00 AM',playersA:'Jeff (0)',playersB:'Hugh (0)'},
-  // Round 3 - Singles Back 9 (corrected strokes, matchups unchanged)
-  {id:'m17',round:3,format:'Singles B9',sideA:'Borden',sideB:'McCoy',teamA:'T4',teamB:'T2',holes:9,time:'8:30 AM',playersA:'Borden (0)',playersB:'McCoy (1)'},
-  {id:'m18',round:3,format:'Singles B9',sideA:'Phil',sideB:'Cuz',teamA:'T4',teamB:'T3',holes:9,time:'8:30 AM',playersA:'Phil (0)',playersB:'Cuz (2)'},
-  {id:'m19',round:3,format:'Singles B9',sideA:'Merman',sideB:'Chris',teamA:'T8',teamB:'T7',holes:9,time:'8:40 AM',playersA:'Merman (0)',playersB:'Chris (2)'},
-  {id:'m20',round:3,format:'Singles B9',sideA:'Hugh',sideB:'Waldrip',teamA:'T8',teamB:'T5',holes:9,time:'8:40 AM',playersA:'Hugh (0)',playersB:'Waldrip (2)'},
-  {id:'m21',round:3,format:'Singles B9',sideA:'Peter',sideB:'TFarm',teamA:'T5',teamB:'T1',holes:9,time:'8:50 AM',playersA:'Peter (0)',playersB:'TFarm (0)'},
-  {id:'m22',round:3,format:'Singles B9',sideA:'Rick',sideB:'Will',teamA:'T1',teamB:'T7',holes:9,time:'8:50 AM',playersA:'Rick (0)',playersB:'Will (3)'},
-  {id:'m23',round:3,format:'Singles B9',sideA:'Brent',sideB:'Willy',teamA:'T6',teamB:'T3',holes:9,time:'9:00 AM',playersA:'Brent (0)',playersB:'Willy (2)'},
-  {id:'m24',round:3,format:'Singles B9',sideA:'Will',sideB:'Cuz',teamA:'T7',teamB:'T3',holes:9,time:'9:00 AM',playersA:'Will (0)',playersB:'Cuz (2)'},
-  // Round 4 - Alt Shot (corrected strokes)
-  {id:'m25',round:4,format:'Alt Shot',sideA:'Merman & Hugh',sideB:'McCoy & TJ',teamA:'T8',teamB:'T2',holes:18,time:'1:30 PM',playersA:'Merman & Hugh (0)',playersB:'McCoy & TJ (4)'},
-  {id:'m26',round:4,format:'Alt Shot',sideA:'Brent & Jeff',sideB:'Borden & Phil',teamA:'T6',teamB:'T4',holes:18,time:'1:40 PM',playersA:'Brent & Jeff (0)',playersB:'Borden & Phil (3)'},
-  {id:'m27',round:4,format:'Alt Shot',sideA:'Peter & Waldrip',sideB:'TFarm & Rick',teamA:'T5',teamB:'T1',holes:18,time:'1:50 PM',playersA:'Pete & Waldrip (1)',playersB:'TFarm & Rick (0)'},
-  {id:'m28',round:4,format:'Alt Shot',sideA:'Willy & Cuz',sideB:'Chris & Will',teamA:'T3',teamB:'T7',holes:18,time:'2:00 PM',playersA:'Willy & Cuz (3)',playersB:'Chris & Will (0)'}
+  // Round 3 - Singles Front 9
+  // 8:30 foursome: Borden, Chris, McCoy, Merman
+  {id:'m9', round:3,format:'Singles F9',sideA:'Borden',sideB:'Chris',  teamA:'T4',teamB:'T7',holes:9,time:'8:30 AM',playersA:'Borden (0)',playersB:'Chris (2)'},
+  {id:'m10',round:3,format:'Singles F9',sideA:'McCoy', sideB:'Merman', teamA:'T2',teamB:'T8',holes:9,time:'8:30 AM',playersA:'McCoy (2)', playersB:'Merman (0)'},
+  // 8:40 foursome: Pete, Willy, Brent, TFarm
+  {id:'m11',round:3,format:'Singles F9',sideA:'Pete',  sideB:'Willy',  teamA:'T5',teamB:'T3',holes:9,time:'8:40 AM',playersA:'Pete (0)',  playersB:'Willy (0)'},
+  {id:'m12',round:3,format:'Singles F9',sideA:'Brent', sideB:'TFarm', teamA:'T6',teamB:'T1',holes:9,time:'8:40 AM',playersA:'Brent (0)', playersB:'TFarm (0)'},
+  // 8:50 foursome: Jeff, Hugh, TJ, Waldrip
+  {id:'m13',round:3,format:'Singles F9',sideA:'Jeff',  sideB:'Hugh',   teamA:'T6',teamB:'T8',holes:9,time:'8:50 AM',playersA:'Jeff (0)',  playersB:'Hugh (0)'},
+  {id:'m14',round:3,format:'Singles F9',sideA:'TJ',    sideB:'Waldrip',teamA:'T2',teamB:'T5',holes:9,time:'8:50 AM',playersA:'TJ (0)',   playersB:'Waldrip (0)'},
+  // 9:00 foursome: Phil, Cuz, Ricky, Will
+  {id:'m15',round:3,format:'Singles F9',sideA:'Phil',  sideB:'Cuz',    teamA:'T4',teamB:'T3',holes:9,time:'9:00 AM',playersA:'Phil (0)', playersB:'Cuz (1)'},
+  {id:'m16',round:3,format:'Singles F9',sideA:'Ricky', sideB:'Will',   teamA:'T1',teamB:'T7',holes:9,time:'9:00 AM',playersA:'Ricky (0)',playersB:'Will (4)'},
+  // Round 3 - Singles Back 9
+  // 8:30 foursome: Borden, Chris, McCoy, Merman
+  {id:'m17',round:3,format:'Singles B9',sideA:'Borden',sideB:'McCoy',  teamA:'T4',teamB:'T2',holes:9,time:'8:30 AM',playersA:'Borden (0)',playersB:'McCoy (1)'},
+  {id:'m18',round:3,format:'Singles B9',sideA:'Merman',sideB:'Chris',  teamA:'T8',teamB:'T7',holes:9,time:'8:30 AM',playersA:'Merman (0)',playersB:'Chris (2)'},
+  // 8:40 foursome: Pete, Willy, Brent, TFarm
+  {id:'m19',round:3,format:'Singles B9',sideA:'Pete',  sideB:'TFarm',  teamA:'T5',teamB:'T1',holes:9,time:'8:40 AM',playersA:'Pete (0)', playersB:'TFarm (0)'},
+  {id:'m20',round:3,format:'Singles B9',sideA:'Brent', sideB:'Willy',  teamA:'T6',teamB:'T3',holes:9,time:'8:40 AM',playersA:'Brent (0)',playersB:'Willy (2)'},
+  // 8:50 foursome: Jeff, Hugh, TJ, Waldrip
+  {id:'m21',round:3,format:'Singles B9',sideA:'Jeff',  sideB:'TJ',     teamA:'T6',teamB:'T2',holes:9,time:'8:50 AM',playersA:'Jeff (0)', playersB:'TJ (2)'},
+  {id:'m22',round:3,format:'Singles B9',sideA:'Hugh',  sideB:'Waldrip',teamA:'T8',teamB:'T5',holes:9,time:'8:50 AM',playersA:'Hugh (0)', playersB:'Waldrip (2)'},
+  // 9:00 foursome: Phil, Cuz, Ricky, Will
+  {id:'m23',round:3,format:'Singles B9',sideA:'Ricky', sideB:'Phil',   teamA:'T1',teamB:'T4',holes:9,time:'9:00 AM',playersA:'Ricky (0)',playersB:'Phil (3)'},
+  {id:'m24',round:3,format:'Singles B9',sideA:'Will',  sideB:'Cuz',    teamA:'T7',teamB:'T3',holes:9,time:'9:00 AM',playersA:'Will (0)', playersB:'Cuz (2)'},
+  // Round 4 - Alt Shot
+  {id:'m25',round:4,format:'Alt Shot',sideA:'Merman & Hugh', sideB:'McCoy & TJ',    teamA:'T8',teamB:'T2',holes:18,time:'1:30 PM',playersA:'Merman & Hugh (0)', playersB:'McCoy & TJ (4)'},
+  {id:'m26',round:4,format:'Alt Shot',sideA:'Brent & Jeff',  sideB:'Borden & Phil', teamA:'T6',teamB:'T4',holes:18,time:'1:40 PM',playersA:'Brent & Jeff (0)',  playersB:'Borden & Phil (3)'},
+  {id:'m27',round:4,format:'Alt Shot',sideA:'Peter & Waldrip',sideB:'TFarm & Rick', teamA:'T5',teamB:'T1',holes:18,time:'1:50 PM',playersA:'Pete & Waldrip (1)',playersB:'TFarm & Rick (0)'},
+  {id:'m28',round:4,format:'Alt Shot',sideA:'Willy & Cuz',   sideB:'Chris & Will',  teamA:'T3',teamB:'T7',holes:18,time:'2:00 PM',playersA:'Willy & Cuz (3)',   playersB:'Chris & Will (0)'}
 ];
 
 let scores = {};
@@ -358,9 +366,7 @@ function renderMatches(round, containerId) {
 }
 
 window.updateScore = function(matchId, side, val) {
-  const key = matchId + '_' + side;
-  const numVal = parseFloat(val) || 0;
-  set(ref(db, 'scores/' + key), numVal);
+  set(ref(db, 'scores/' + matchId + '_' + side), parseFloat(val) || 0);
 };
 
 window.showTab = function(id, btn) {
