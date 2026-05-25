@@ -19,7 +19,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .sync-status.disconnected { color: #fca5a5; }
 
 .tabs { display: flex; background: #1a472a; border-bottom: 2px solid #c9a84c; }
-.tab { flex: 1; padding: 9px 2px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.6); cursor: pointer; border: none; background: none; transition: all 0.15s; font-family: inherit; }
+.tab { flex: 1; padding: 9px 1px; text-align: center; font-size: 10px; color: rgba(255,255,255,0.6); cursor: pointer; border: none; background: none; transition: all 0.15s; font-family: inherit; }
 .tab.active { color: #c9a84c; border-bottom: 2px solid #c9a84c; margin-bottom: -2px; font-weight: 600; }
 
 .section { display: none; padding: 0.875rem; }
@@ -86,6 +86,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .score-sep { text-align: center; font-size: 14px; color: #ccc; }
 .singles-note { font-size: 11px; color: #aaa; margin-top: 8px; padding-top: 8px; border-top: 1px solid #f0f0ec; }
 
+/* Info tab */
+.info-hero { background: #1a472a; border-radius: 12px; padding: 1.25rem; text-align: center; margin-bottom: 0.875rem; }
+.info-hero h2 { color: #c9a84c; font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.info-hero p { color: rgba(255,255,255,0.7); font-size: 12px; }
+.info-card { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 0.875rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.info-card-header { background: #f4f4f0; padding: 8px 14px; font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.6px; display: flex; align-items: center; gap: 6px; }
+.info-row { padding: 10px 14px; border-top: 1px solid #f0f0ec; display: flex; gap: 10px; align-items: flex-start; }
+.info-row:first-of-type { border-top: none; }
+.info-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.info-content { flex: 1; }
+.info-label { font-size: 11px; font-weight: 700; color: #1a472a; margin-bottom: 2px; }
+.info-text { font-size: 13px; color: #333; line-height: 1.4; }
+.info-text a { color: #1a472a; font-weight: 600; }
+.info-subtext { font-size: 11px; color: #999; margin-top: 2px; }
+.payout-pill { display: inline-block; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: #7a5c00; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; margin: 2px 2px 0 0; }
+
 .thu-info { background: white; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 0.875rem; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .thu-info h3 { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
 .thu-info p { font-size: 12px; color: #999; }
@@ -105,10 +121,113 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div id="sync-status" class="sync-status">Connecting...</div>
   </div>
   <div class="tabs">
+    <button class="tab" onclick="showTab('info', this)">Info</button>
     <button class="tab" onclick="showTab('thursday', this)">Thursday</button>
     <button class="tab active" onclick="showTab('leaderboard', this)">Leaderboard</button>
     <button class="tab" onclick="showTab('friday', this)">Friday</button>
     <button class="tab" onclick="showTab('saturday', this)">Saturday</button>
+  </div>
+
+  <div id="info" class="section">
+    <div class="info-hero">
+      <h2>🏌️ TigerFest 2026</h2>
+      <p>May 28–30 · Cashiers, NC · The greatest weekend Borden refuses to enjoy</p>
+    </div>
+
+    <!-- Buy-In -->
+    <div class="info-card">
+      <div class="info-card-header">💰 Buy-In & Payouts</div>
+      <div class="info-row">
+        <div class="info-icon">💵</div>
+        <div class="info-content">
+          <div class="info-label">Buy-In</div>
+          <div class="info-text">$250 per man · <strong>Cash only</strong> (no Venmo)</div>
+          <div class="info-subtext">Hand cash directly to Jeff</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🏆</div>
+        <div class="info-content">
+          <div class="info-label">Payout Categories</div>
+          <div class="info-text">
+            <span class="payout-pill">Par 3 Winners</span>
+            <span class="payout-pill">Day 1 Most Points</span>
+            <span class="payout-pill">Day 2 Most Points</span>
+            <span class="payout-pill">TigerFest Champion</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lodging -->
+    <div class="info-card">
+      <div class="info-card-header">🏡 Lodging</div>
+      <div class="info-row">
+        <div class="info-icon">🏠</div>
+        <div class="info-content">
+          <div class="info-label">House 1</div>
+          <div class="info-text">2384 Highlands Cove Drive</div>
+          <div class="info-subtext">Cashiers, NC 28717</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🏠</div>
+        <div class="info-content">
+          <div class="info-label">House 2</div>
+          <div class="info-text">412 Norton Rdg Lane</div>
+          <div class="info-subtext">Cashiers, NC 28717</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div class="info-content">
+          <div class="info-text">Both houses ~half mile from each other and close to Glen Cove Par 3 course · 8 guys per house</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meals -->
+    <div class="info-card">
+      <div class="info-card-header">🍽️ Meals & Dining</div>
+      <div class="info-row">
+        <div class="info-icon">📅</div>
+        <div class="info-content">
+          <div class="info-label">Thursday</div>
+          <div class="info-text">🍴 <strong>Dinner:</strong> Glen Cove Clubhouse Patio (after Par 3 Tournament)</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📅</div>
+        <div class="info-content">
+          <div class="info-label">Friday</div>
+          <div class="info-text">🌯 <strong>Breakfast:</strong> Breakfast burritos at Old Edwards (each morning)</div>
+          <div class="info-text" style="margin-top:4px">🍔 <strong>Lunch:</strong> Old Edwards Grill (between rounds)</div>
+          <div class="info-text" style="margin-top:4px">🍕 <strong>Dinner:</strong> Pizza pool party</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📅</div>
+        <div class="info-content">
+          <div class="info-label">Saturday</div>
+          <div class="info-text">🌯 <strong>Breakfast:</strong> Old Edwards breakfast burritos</div>
+          <div class="info-text" style="margin-top:4px">🍔 <strong>Lunch:</strong> Old Edwards Grill (between rounds)</div>
+          <div class="info-text" style="margin-top:4px">🌮 <strong>Dinner:</strong> Tacos at the house (same chef as last year)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scoring note -->
+    <div class="info-card">
+      <div class="info-card-header">📱 Scoring</div>
+      <div class="info-row">
+        <div class="info-icon">✏️</div>
+        <div class="info-content">
+          <div class="info-label">Official Scorekeeper</div>
+          <div class="info-text"><strong>Brent</strong> is the only person entering final scores into the app.</div>
+          <div class="info-subtext">Check the Leaderboard tab anytime to see the live standings.</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="thursday" class="section">
